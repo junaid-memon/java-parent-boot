@@ -77,7 +77,7 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>java-parent-boot</id>
+            <id>github</id>
             <name>Java Parent Boot Packages</name>
             <url>https://maven.pkg.github.com/junaid-memon/java-parent-boot</url>
         </repository>
