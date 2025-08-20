@@ -7,25 +7,28 @@
 
     <artifactId>java-parent-boot</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-
-<repositories>
-  <repository>
-    <id>github</id>
-    <url>https://maven.pkg.github.com/junaid-memon/java-parent</url>
-    <releases>
-      <enabled>true</enabled>
-    </releases>
-    <snapshots>
-      <enabled>true</enabled>
-    </snapshots>
-  </repository>
-</repositories>
          
     <parent>
         <groupId>com.portfolio.app</groupId>
         <artifactId>java-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
+
+    <repositories>
+         <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/junaid-memon/java-parent</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/junaid-memon/java-parent</url>
+        </pluginRepository>
+    </pluginRepositories>
+         
     <properties>
         <spring-boot.version>3.5.4</spring-boot.version>
         <spring-cloud.version>2025.0.0</spring-cloud.version>
