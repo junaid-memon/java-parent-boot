@@ -19,9 +19,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      # Build the child project
-      - name: Build child
-        run: mvn clean verify
+      - name: Build and verify
+        run: mvn --batch-mode clean verify
+        env:
+          # PAT with read: packages scope
+          GITHUB_TOKEN: ${{ secrets.PARENT_PAT }}
 
       - name: Publish package
         run: mvn --batch-mode deploy
