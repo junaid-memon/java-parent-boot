@@ -1,26 +1,34 @@
-name: Publish package to GitHub Packages
+name: Build Java Parent Boot
 on:
   push:
-    branches: [ "main" ]  # Only publish from main branch
+    branches: [ "main" ]
+
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     steps:
+      # Check out the child repo
       - uses: actions/checkout@v4
+
+      # Check out the parent repo into a folder
+      - uses: actions/checkout@v4
+        with:
+          repository: junaid-memon/java-parent
+          path: java-parent
+
+      # Setup Java
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-          server-id: 'github'
-      - run: mvn --batch-mode --update-snapshots verify
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Package
-          path: staging 
-      - name: Publish package
-        run: mvn --batch-mode deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
+
+      # Install the parent POM locally
+      - name: Install parent locally
+        run: mvn -f java-parent/pom.xml clean install -DskipTests
+
+      # Build the child project
+      - name: Build child
+        run: mvn clean verify
