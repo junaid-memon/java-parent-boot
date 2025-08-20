@@ -13,21 +13,11 @@ jobs:
       # Check out the child repo
       - uses: actions/checkout@v4
 
-      # Check out the parent repo into a folder
-      - uses: actions/checkout@v4
-        with:
-          repository: junaid-memon/java-parent
-          path: java-parent
-
       # Setup Java
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-
-      # Install the parent POM locally
-      - name: Install parent locally
-        run: mvn -f java-parent/pom.xml clean install -DskipTests
 
       # Build the child project
       - name: Build child
