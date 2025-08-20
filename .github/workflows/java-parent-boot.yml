@@ -32,3 +32,8 @@ jobs:
       # Build the child project
       - name: Build child
         run: mvn clean verify
+
+      - name: Publish package
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
